@@ -1,2 +1,2 @@
 # Modern Static HTML Boilerplate
-#### Good old Static HTML but with modern tooling and Javascript-driven development
+Write the same good-old-boring static HTML projects but with modern tooling and Javascript-driven development
