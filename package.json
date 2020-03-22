@@ -1,0 +1,25 @@
+{
+	"name": "modern-static-html-boilerplate",
+	"version": "1.0.0",
+	"description": "Write the same good-old-boring static HTML projects but with modern tooling and Javascript-driven development",
+	"main": "src/js/main.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nfmohit-wpmudev/modern-static-html-boilerplate.git"
+	},
+	"keywords": [
+		"html",
+		"static-html",
+		"boilerplate",
+		"modern-html"
+	],
+	"author": "Nahid Ferdous Mohit",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/nfmohit-wpmudev/modern-static-html-boilerplate/issues"
+	},
+	"homepage": "https://github.com/nfmohit-wpmudev/modern-static-html-boilerplate#readme"
+}
