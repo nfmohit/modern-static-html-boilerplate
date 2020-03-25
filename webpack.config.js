@@ -10,13 +10,56 @@
  */
 
 const path = require( 'path' );
+const glob = require( 'glob' );
+
+/*
+ * Plugins
+ */
+
+const HTMLWebpackPlugin = require( 'html-webpack-plugin' );
+
+/*
+ * Variables
+ */
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+/*
+ * Functions 
+ */
+
+/* Generates HTML files */
+
+const generateHTML = () => glob.sync( './src/**/*.html' ).map(
+	dir => new HTMLWebpackPlugin( {
+		filename: path.basename( dir ),
+		template: dir,
+	} ),
+);
+
+/*
+ * Webpack Configuration
+ */
 
 module.exports = {
+	mode: isProduction ? 'production' : 'development',
+	devtool: isProduction ?  false : 'eval-source-map',
 	entry: './src/js/main.js',
+
 	output: {
-		path: path.resolve( __dirname, 'dist' ),
-		filename: 'main.min.js'
+		path: path.resolve( __dirname, 'dist/js/' ),
+		filename: isProduction ? 'main.min.js' : 'main.js'
 	},
+
+	devServer: {
+		contentBase: isProduction ? 'dist' : 'src',
+		watchContentBase: ! isProduction,
+		hot: ! isProduction,
+		open: true,
+		port: isProduction ? 1010 : 1111,
+		host: 'localhost',
+	},
+
 	module: {
 		rules: [
 			{
@@ -28,5 +71,9 @@ module.exports = {
 				}
 			}
 		]
-	}
+	},
+
+	plugins: [
+		...generateHTML()
+	]
 }
