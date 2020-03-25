@@ -47,8 +47,8 @@ module.exports = {
 	entry: './src/js/main.js',
 
 	output: {
-		path: path.resolve( __dirname, 'dist/js/' ),
-		filename: isProduction ? 'main.min.js' : 'main.js'
+		path: path.resolve( __dirname, 'dist/' ),
+		filename: 'js/' + ( isProduction ? 'main.min.js' : 'main.js' )
 	},
 
 	devServer: {
@@ -56,7 +56,7 @@ module.exports = {
 		watchContentBase: ! isProduction,
 		hot: ! isProduction,
 		open: true,
-		port: isProduction ? 1010 : 1111,
+		port: isProduction ? 1112 : 1111,
 		host: 'localhost',
 	},
 
