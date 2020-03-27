@@ -1,22 +1,12 @@
 {
-    "extends": [
-        "airbnb-base",
-        "prettier"
-    ],
-    "plugins": [
-        "prettier"
-    ],
-    "rules": {
-        "prettier/prettier": "error",
-        "max-len": [
-            "error",
-            80
-        ],
-        "import/no-extraneous-dependencies": [
-            "off"
-        ]
-    },
-    "env": {
-        "browser": true
-    }
+	"extends": [ "airbnb-base", "prettier" ],
+	"plugins": [ "prettier" ],
+	"rules": {
+		"prettier/prettier": "error",
+		"max-len": [ "error", 80 ],
+		"import/no-extraneous-dependencies": [ "off" ]
+	},
+	"env": {
+		"browser": true
+	}
 }
