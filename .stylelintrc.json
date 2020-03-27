@@ -4,5 +4,8 @@
 		"stylelint-config-sass-guidelines",
 		"stylelint-config-prettier"
 	],
-	"plugins": [ "stylelint-scss" ]
+	"plugins": [ "stylelint-scss" ],
+	"rules": {
+		"declaration-colon-space-after": "always-single-line"
+	}
 }

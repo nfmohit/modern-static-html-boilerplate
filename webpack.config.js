@@ -18,6 +18,7 @@ const glob = require( 'glob' );
 
 const HTMLWebpackPlugin = require( 'html-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
+const StylelintPlugin = require( 'stylelint-webpack-plugin' );
 
 /*
  * Variables
@@ -69,12 +70,10 @@ module.exports = {
 			{
 				enforce: 'pre',
 				test: /\.js$/,
-				exclude: /node_modules/,
 				loader: 'eslint-loader'
 			},
 			{
 				test: /\.js$/,
-				exclude: /node_modules/,
 				loader: 'babel-loader',
 				options: {
 					presets: [ '@babel/preset-env' ]
@@ -92,6 +91,17 @@ module.exports = {
 					'postcss-loader',
 					'sass-loader'
 				]
+			},
+			{
+				enforce: 'pre',
+				test: /\.html$/,
+				exclude: /node_modules/,
+				loader: 'prettier-loader'
+			},
+			{
+				test: /\.html$/,
+				exclude: /node_modules/,
+				loader: 'html-loader'
 			}
 		]
 	},
@@ -100,6 +110,7 @@ module.exports = {
 		...generateHTML(),
 		new MiniCssExtractPlugin( {
 			filename: 'css/[name].min.css'
-		} )
+		} ),
+		new StylelintPlugin()
 	]
 };
