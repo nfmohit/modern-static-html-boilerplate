@@ -17,6 +17,7 @@ const glob = require( 'glob' );
  */
 
 const HTMLWebpackPlugin = require( 'html-webpack-plugin' );
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 /*
  * Variables
@@ -76,7 +77,11 @@ module.exports = {
 			{
 				test: /\.(sass|scss)$/,
 				use: [
-					'style-loader',
+					isProduction
+						? {
+								loader: MiniCssExtractPlugin.loader
+						  }
+						: 'style-loader',
 					'css-loader',
 					'postcss-loader',
 					'sass-loader'
@@ -85,5 +90,10 @@ module.exports = {
 		]
 	},
 
-	plugins: [ ...generateHTML() ]
+	plugins: [
+		...generateHTML(),
+		new MiniCssExtractPlugin( {
+			filename: 'css/[name].min.css'
+		} )
+	]
 };
