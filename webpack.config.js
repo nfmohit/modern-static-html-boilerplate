@@ -35,7 +35,7 @@ const generateHTML = () =>
 		( dir ) =>
 			new HTMLWebpackPlugin( {
 				filename: path.basename( dir ),
-				template: dir,
+				template: dir
 			} )
 	);
 
@@ -50,16 +50,17 @@ module.exports = {
 
 	output: {
 		path: path.resolve( __dirname, 'dist/' ),
-		filename: `js/${ isProduction ? 'main.min.js' : 'main.js' }`,
+		filename: `js/${ isProduction ? 'main.min.js' : 'main.js' }`
 	},
 
 	devServer: {
 		contentBase: isProduction ? 'dist' : 'src',
 		watchContentBase: ! isProduction,
 		hot: ! isProduction,
+		liveReload: ! isProduction,
 		open: true,
 		port: isProduction ? 1112 : 1111,
-		host: 'localhost',
+		host: 'localhost'
 	},
 
 	module: {
@@ -69,11 +70,20 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: 'babel-loader',
 				options: {
-					presets: [ '@babel/preset-env' ],
-				},
+					presets: [ '@babel/preset-env' ]
+				}
 			},
-		],
+			{
+				test: /\.(sass|scss)$/,
+				use: [
+					'style-loader',
+					'css-loader',
+					'postcss-loader',
+					'sass-loader'
+				]
+			}
+		]
 	},
 
-	plugins: [ ...generateHTML() ],
+	plugins: [ ...generateHTML() ]
 };
