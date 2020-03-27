@@ -25,17 +25,19 @@ const HTMLWebpackPlugin = require( 'html-webpack-plugin' );
 const isProduction = process.env.NODE_ENV === 'production';
 
 /*
- * Functions 
+ * Functions
  */
 
 /* Generates HTML files */
 
-const generateHTML = () => glob.sync( './src/**/*.html' ).map(
-	dir => new HTMLWebpackPlugin( {
-		filename: path.basename( dir ),
-		template: dir,
-	} ),
-);
+const generateHTML = () =>
+	glob.sync( './src/**/*.html' ).map(
+		( dir ) =>
+			new HTMLWebpackPlugin( {
+				filename: path.basename( dir ),
+				template: dir,
+			} )
+	);
 
 /*
  * Webpack Configuration
@@ -43,12 +45,12 @@ const generateHTML = () => glob.sync( './src/**/*.html' ).map(
 
 module.exports = {
 	mode: isProduction ? 'production' : 'development',
-	devtool: isProduction ?  false : 'eval-source-map',
+	devtool: isProduction ? false : 'eval-source-map',
 	entry: './src/js/main.js',
 
 	output: {
 		path: path.resolve( __dirname, 'dist/' ),
-		filename: 'js/' + ( isProduction ? 'main.min.js' : 'main.js' )
+		filename: `js/${ isProduction ? 'main.min.js' : 'main.js' }`,
 	},
 
 	devServer: {
@@ -67,13 +69,11 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: 'babel-loader',
 				options: {
-					presets: [ '@babel/preset-env' ]
-				}
-			}
-		]
+					presets: [ '@babel/preset-env' ],
+				},
+			},
+		],
 	},
 
-	plugins: [
-		...generateHTML()
-	]
-}
+	plugins: [ ...generateHTML() ],
+};
