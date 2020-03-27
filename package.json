@@ -14,7 +14,8 @@
 		"lint-js:fix": "eslint '**/*.js' --fix",
 		"lint-css": "stylelint '**/*.scss'",
 		"lint-css:fix": "stylelint '**/*.scss' --fix",
-		"stylelint-check": "stylelint-config-prettier-check"
+		"format": "prettier --check '**/*.{html,json,md}'",
+		"format:fix": "prettier --write '**/*.{html,json,md}'"
 	},
 	"repository": {
 		"type": "git",
