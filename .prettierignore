@@ -5,6 +5,4 @@ node_modules
 
 # Directories/files that may appear in the environment
 
-.DS_Store
-*.log
-.env
+package-lock.json
