@@ -70,7 +70,10 @@ module.exports = {
 			{
 				enforce: 'pre',
 				test: /\.js$/,
-				loader: 'eslint-loader'
+				loader: 'eslint-loader',
+				options: {
+					fix: true
+				}
 			},
 			{
 				test: /\.js$/,
@@ -111,6 +114,8 @@ module.exports = {
 		new MiniCssExtractPlugin( {
 			filename: 'css/[name].min.css'
 		} ),
-		new StylelintPlugin()
+		new StylelintPlugin( {
+			fix: true
+		} )
 	]
 };
