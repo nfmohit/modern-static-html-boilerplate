@@ -11,6 +11,7 @@
 
 const path = require( 'path' );
 const glob = require( 'glob' );
+const cssnano = require( 'cssnano' );
 
 /*
  * Plugins
@@ -19,6 +20,7 @@ const glob = require( 'glob' );
 const HTMLWebpackPlugin = require( 'html-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const StylelintPlugin = require( 'stylelint-webpack-plugin' );
+const OptimizeCssAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
 
 /*
  * Variables
@@ -105,6 +107,22 @@ module.exports = {
 				test: /\.html$/,
 				exclude: /node_modules/,
 				loader: 'html-loader'
+			},
+			{
+				test: /\.(pdf|gif|png|jpe?g|svg)$/,
+				loader: 'file-loader',
+				options: {
+					name: '[name].[ext]',
+					outputPath: 'static/'
+				}
+			},
+			{
+				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+				loader: 'file-loader',
+				options: {
+					name: '[name].[ext]',
+					outputPath: 'fonts/'
+				}
 			}
 		]
 	},
@@ -116,6 +134,12 @@ module.exports = {
 		} ),
 		new StylelintPlugin( {
 			fix: true
+		} ),
+		new OptimizeCssAssetsPlugin( {
+			assetNameRegExp: /\.css$/g,
+			cssProcessor: cssnano,
+			cssProcessorOptions: { discardComments: { removeAll: true } },
+			canPrint: true
 		} )
 	]
 };
