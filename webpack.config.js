@@ -54,7 +54,9 @@ module.exports = {
 
 	output: {
 		path: path.resolve( __dirname, 'dist/' ),
-		filename: `js/${ isProduction ? 'main.min.js' : 'main.js' }`
+		filename: `js/${
+			isProduction ? '[name].[contenthash].min.js' : '[name].js'
+		}`
 	},
 
 	devServer: {
@@ -66,6 +68,31 @@ module.exports = {
 		port: isProduction ? 1112 : 1111,
 		host: 'localhost'
 	},
+
+	optimization: isProduction
+		? {
+				runtimeChunk: 'single',
+				splitChunks: {
+					chunks: 'all',
+					maxInitialRequests: Infinity,
+					minSize: 0,
+					cacheGroups: {
+						vendor: {
+							test: /[\\/]node_modules[\\/]/,
+							name( module ) {
+								const packageName = module.context.match(
+									/[\\/]node_modules[\\/](.*?)([\\/]|$)/
+								)[ 1 ];
+								return `npm.${ packageName.replace(
+									'@',
+									''
+								) }`;
+							}
+						}
+					}
+				}
+		  }
+		: {},
 
 	module: {
 		rules: [
@@ -130,7 +157,8 @@ module.exports = {
 	plugins: [
 		...generateHTML(),
 		new MiniCssExtractPlugin( {
-			filename: 'css/[name].min.css'
+			filename: 'css/[name].min.css',
+			chunkFilename: 'css/[id].min.css'
 		} ),
 		new StylelintPlugin( {
 			fix: true
