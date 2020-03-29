@@ -10,3 +10,9 @@
  */
 
 import '../sass/main.scss';
+
+/*
+ * Import Bootstrap
+ */
+
+import 'bootstrap';
