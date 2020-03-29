@@ -6,10 +6,10 @@
  */
 
 /*
- * Load SASS File(S)
+ * Load styles
  */
 
-import '../sass/main.scss';
+import './styles';
 
 /*
  * Import Bootstrap
