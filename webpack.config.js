@@ -21,6 +21,7 @@ const HTMLWebpackPlugin = require( 'html-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const StylelintPlugin = require( 'stylelint-webpack-plugin' );
 const OptimizeCssAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
+const { CleanWebpackPlugin } = require( 'clean-webpack-plugin' );
 
 /*
  * Variables
@@ -158,7 +159,7 @@ module.exports = {
 		...generateHTML(),
 		new MiniCssExtractPlugin( {
 			filename: 'css/[name].min.css',
-			chunkFilename: 'css/[id].min.css'
+			chunkFilename: 'css/[name].[contenthash].min.css'
 		} ),
 		new StylelintPlugin( {
 			fix: true
@@ -168,6 +169,7 @@ module.exports = {
 			cssProcessor: cssnano,
 			cssProcessorOptions: { discardComments: { removeAll: true } },
 			canPrint: true
-		} )
+		} ),
+		new CleanWebpackPlugin()
 	]
 };
