@@ -67,7 +67,13 @@ module.exports = {
 		liveReload: ! isProduction,
 		open: true,
 		port: isProduction ? 1112 : 1111,
-		host: 'localhost'
+		host: 'localhost',
+		headers: {
+			'Cache-Control': isProduction
+				? 'public, max-age=604800'
+				: 'private, max-age=0, no-cache'
+		},
+		compress: isProduction
 	},
 
 	optimization: isProduction
