@@ -10,12 +10,12 @@
 		"start": "cross-env NODE_ENV=production webpack && cross-env NODE_ENV=production webpack-dev-server",
 		"lint": "concurrently \"npm run lint-js\" \"npm run lint-css\" \"npm run format\"",
 		"lint:fix": "concurrently \"npm run lint-js:fix\" \"npm run lint-css:fix\" \"npm run format:fix\"",
-		"lint-js": "eslint '**/*.js'",
-		"lint-js:fix": "eslint '**/*.js' --fix",
-		"lint-css": "stylelint '**/*.{css,scss,sass}'",
-		"lint-css:fix": "stylelint '**/*.{css,scss,sass}' --fix",
-		"format": "prettier --check '**/*.{html,json,md}'",
-		"format:fix": "prettier --write '**/*.{html,json,md}'"
+		"lint-js": "eslint \"**/*.js\"",
+		"lint-js:fix": "eslint \"**/*.js\" --fix",
+		"lint-css": "stylelint \"**/*.{css,scss,sass}\"",
+		"lint-css:fix": "stylelint \"**/*.{css,scss,sass}\" --fix",
+		"format": "prettier --check \"**/*.{html,json,md}\"",
+		"format:fix": "prettier --write \"**/*.{html,json,md}\""
 	},
 	"repository": {
 		"type": "git",
