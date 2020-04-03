@@ -1,5 +1,9 @@
 {
-	"extends": [ "airbnb-base", "prettier" ],
+	"extends": [
+		"airbnb-base",
+		"plugin:@wordpress/eslint-plugin/recommended",
+		"prettier"
+	],
 	"plugins": [ "prettier" ],
 	"rules": {
 		"prettier/prettier": "error",
