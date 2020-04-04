@@ -22,6 +22,7 @@ const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const StylelintPlugin = require( 'stylelint-webpack-plugin' );
 const OptimizeCssAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
 const { CleanWebpackPlugin } = require( 'clean-webpack-plugin' );
+const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
 
 /*
  * Variables
@@ -143,7 +144,7 @@ module.exports = {
 				loader: 'html-loader'
 			},
 			{
-				test: /\.(pdf|gif|png|jpe?g|svg)$/,
+				test: /\.(pdf|gif|png|jpe?g)$/,
 				loader: 'file-loader',
 				options: {
 					name: '[name].[ext]',
@@ -151,7 +152,26 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+				test: /\.svg$/,
+				exclude: [ path.resolve( __dirname, 'src/fonts' ) ],
+				loader: 'file-loader',
+				options: {
+					name: '[name].[ext]',
+					outputPath: 'static/'
+				}
+			},
+			{
+				test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+				loader: 'file-loader',
+				options: {
+					name: '[name].[ext]',
+					outputPath: 'fonts/',
+					publicPath: '../fonts/'
+				}
+			},
+			{
+				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+				include: [ path.resolve( __dirname, 'src/fonts' ) ],
 				loader: 'file-loader',
 				options: {
 					name: '[name].[ext]',
@@ -163,13 +183,13 @@ module.exports = {
 	},
 
 	plugins: [
-		...generateHTML(),
+		new CleanWebpackPlugin(),
+		new StylelintPlugin( {
+			fix: true
+		} ),
 		new MiniCssExtractPlugin( {
 			filename: 'css/[name].min.css',
 			chunkFilename: 'css/[name].[contenthash].min.css'
-		} ),
-		new StylelintPlugin( {
-			fix: true
 		} ),
 		new OptimizeCssAssetsPlugin( {
 			assetNameRegExp: /\.css$/g,
@@ -177,6 +197,12 @@ module.exports = {
 			cssProcessorOptions: { discardComments: { removeAll: true } },
 			canPrint: true
 		} ),
-		new CleanWebpackPlugin()
+		new CopyWebpackPlugin( [
+			{
+				from: './src/static/',
+				to: './static/'
+			}
+		] ),
+		...generateHTML()
 	]
 };
