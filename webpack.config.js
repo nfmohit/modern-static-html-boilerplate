@@ -145,26 +145,82 @@ module.exports = {
 			},
 			{
 				test: /\.(pdf|gif|png|jpe?g)$/,
-				loader: 'file-loader',
-				options: {
-					name: '[name].[ext]',
-					outputPath: 'static/'
-				}
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: isProduction
+								? '[name].[contenthash].[ext]'
+								: '[name].[ext]',
+							outputPath: 'static/'
+						}
+					},
+					isProduction
+						? {
+								loader: 'image-webpack-loader',
+								options: {
+									bypassOnDebug: true,
+									gifsicle: {
+										interlaced: false
+									},
+									optipng: {
+										optimizationLevel: 7
+									},
+									pngquant: {
+										quality: '65-90',
+										speed: 4
+									},
+									mozjpeg: {
+										progressive: true
+									}
+								}
+						  }
+						: null
+				].filter( Boolean )
 			},
 			{
 				test: /\.svg$/,
 				exclude: [ path.resolve( __dirname, 'src/fonts' ) ],
-				loader: 'file-loader',
-				options: {
-					name: '[name].[ext]',
-					outputPath: 'static/'
-				}
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: isProduction
+								? '[name].[contenthash].[ext]'
+								: '[name].[ext]',
+							outputPath: 'static/'
+						}
+					},
+					isProduction
+						? {
+								loader: 'image-webpack-loader',
+								options: {
+									bypassOnDebug: true,
+									gifsicle: {
+										interlaced: false
+									},
+									optipng: {
+										optimizationLevel: 7
+									},
+									pngquant: {
+										quality: '65-90',
+										speed: 4
+									},
+									mozjpeg: {
+										progressive: true
+									}
+								}
+						  }
+						: null
+				].filter( Boolean )
 			},
 			{
 				test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
 				loader: 'file-loader',
 				options: {
-					name: '[name].[ext]',
+					name: isProduction
+						? '[name].[contenthash].[ext]'
+						: '[name].[ext]',
 					outputPath: 'fonts/',
 					publicPath: '../fonts/'
 				}
@@ -174,7 +230,9 @@ module.exports = {
 				include: [ path.resolve( __dirname, 'src/fonts' ) ],
 				loader: 'file-loader',
 				options: {
-					name: '[name].[ext]',
+					name: isProduction
+						? '[name].[contenthash].[ext]'
+						: '[name].[ext]',
 					outputPath: 'fonts/',
 					publicPath: '../fonts/'
 				}
