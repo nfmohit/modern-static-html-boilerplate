@@ -8,21 +8,12 @@
 /*
  * Dependencies
  */
-const wordpressPrettierConfig = require( '@wordpress/prettier-config' );
+const nahidPrettierConfig = require( 'prettier-config-nahid' );
 
 /*
  * Prettier configuration
  */
 
 module.exports = {
-	...wordpressPrettierConfig,
-	trailingComma: 'none',
-	overrides: [
-		{
-			files: '*.html',
-			options: {
-				parser: 'html'
-			}
-		}
-	]
+	...nahidPrettierConfig
 };

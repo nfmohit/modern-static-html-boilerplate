@@ -1,16 +1,3 @@
 {
-	"extends": [
-		"airbnb-base",
-		"plugin:@wordpress/eslint-plugin/recommended",
-		"prettier"
-	],
-	"plugins": [ "prettier" ],
-	"rules": {
-		"prettier/prettier": "error",
-		"max-len": [ "error", 80 ],
-		"import/no-extraneous-dependencies": [ "off" ]
-	},
-	"env": {
-		"browser": true
-	}
+	"extends": [ "nahid" ]
 }

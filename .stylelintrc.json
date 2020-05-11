@@ -1,12 +1,3 @@
 {
-	"extends": [
-		"stylelint-config-standard",
-		"stylelint-config-sass-guidelines",
-		"stylelint-config-wordpress",
-		"stylelint-prettier/recommended"
-	],
-	"plugins": [ "stylelint-scss" ],
-	"rules": {
-		"declaration-colon-space-after": "always-single-line"
-	}
+	"extends": [ "stylelint-config-nahid" ]
 }
