@@ -41,7 +41,10 @@ const generateHTML = () =>
 		( dir ) =>
 			new HTMLWebpackPlugin( {
 				filename: path.basename( dir ),
-				template: dir
+				template: dir,
+				minify: {
+					removeRedundantAttributes: false
+				}
 			} )
 	);
 
